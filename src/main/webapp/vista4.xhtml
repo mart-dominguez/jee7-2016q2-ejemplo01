@@ -1,20 +1,51 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
 
     <body>
 
         <ui:composition template="./template.xhtml">
 
             <ui:define name="top">
-                top
+                <h1>Ejemplos de uso de ambitos CDI</h1>
             </ui:define>
 
             <ui:define name="content">
-                content
+                <h:form id="frmEjemplo01">
+                    <p:panelGrid columns="3">
+                        <f:facet name="header">
+                            <h2>Ingrese datos que se almacenarán en distintos ambitos</h2>
+                            <p>#{ctrlV04.fechaBean}</p>
+                        </f:facet>
+                        <p:outputLabel for="textoApp" value="Texto en ambito aplicacion:" />
+                        <p:inputText id="textoApp" value="#{ctrlV04.beanApp.textoGenerado}"/>
+                        <h:outputText value="#{ctrlV04.beanApp.fechaCreacionBean}"/>                                               
+                        <p:outputLabel for="textoSesion" value="Texto en ambito sesion" />
+                        <p:inputText id="textoSesion" value="#{ctrlV04.beanSes.textoGenerado}"/>
+                        <h:outputText value="#{ctrlV04.beanSes.fechaCreacionBean}"/>                                               
+                        <p:outputLabel for="textoConv" value="Texto en ambito de conversacion:" />
+                        <p:inputText id="textoConv" value="#{ctrlV04.beanConv.textoGenerado}"/>
+                        <h:outputText value="#{ctrlV04.beanConv.fechaCreacionBean}"/>                                               
+                        <p:outputLabel for="textoApp" value="Texto en ambito de vista" />
+                        <p:inputText id="textoVista" value="#{ctrlV04.beanVista.textoGenerado}"/>
+                        <h:outputText value="#{ctrlV04.beanVista.fechaCreacionBean}"/>                                               
+                        <p:outputLabel for="textoReq" value="Texto en ambito de request" />
+                        <p:inputText id="textoReq" value="#{ctrlV04.beanReq.textoGenerado}"/>
+                        <h:outputText value="#{ctrlV04.beanReq.fechaCreacionBean}"/>                                               
+                        <f:facet name="footer">
+                            <p:button outcome="vista3" value="Anterior"></p:button>
+                            <p:commandButton value="Enviar datos SIN AJAX" ajax="false" action="#{ctrlV04.guardarSinAjax()}"></p:commandButton>
+                            <p:commandButton value="Enviar datos CON AJAX" update="frmEjemplo01"  action="#{ctrlV04.guardarSinAjax()}" ></p:commandButton>
+                            <p:commandButton value="Iniciar conversacion"  action="#{ctrlV04.iniciarConvesacion()}"></p:commandButton>
+                        </f:facet>
+                    </p:panelGrid>                    
+                </h:form>
             </ui:define>
-
         </ui:composition>
 
     </body>
